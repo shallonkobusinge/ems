@@ -12,13 +12,15 @@ app.use("cors", cors());
 
 app.set('port', port);
 
+require("./src/routes/user.router")(app);
+
 mongoose.connect(process.env.DB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })
     .then(() => {
         app.listen(port, () => {
-            console.log(`Server is running  https://localhost/${port}`);
+            console.log(`Server is running  https://localhost:${port}`);
         });
     }).catch(err => {
         console.log(err);

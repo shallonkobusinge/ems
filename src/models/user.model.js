@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Joi = require('joi');
 const jwt = require('jsonwebtoken');
 Joi.objectId = require('joi-objectid')(Joi);
+const pagination = require("mongoose-paginate-v2")
 
 const UserSchema = new mongoose.Schema({
     fname: {
@@ -37,6 +38,8 @@ const UserSchema = new mongoose.Schema({
 }, {
     timestamps: true,
 })
+
+UserSchema.plugin(pagination)
 
 exports.User = mongoose.model("User", UserSchema);
 
