@@ -27,7 +27,7 @@ const UserSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    usernames: {
+    username: {
         type: String,
 
     },
@@ -50,7 +50,7 @@ exports.validateUser = function (user) {
         email: Joi.string().email().required(),
         password: Joi.string().min(3).required(),
         isAdmin: Joi.boolean(),
-        usernames: Joi.string(),
+        username: Joi.string(),
         phone: Joi.string(),
     })
     return schema.validate(user);
