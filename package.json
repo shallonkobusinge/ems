@@ -1,0 +1,19 @@
+{
+  "name": "ems",
+  "version": "1.0.0",
+  "description": "Employee management system",
+  "main": "index.js",
+  "repository": "https://github.com/shallonkobusinge/ems.git",
+  "author": "Shallon Kobusinge",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "dependencies": {
+    "body-parse": "^0.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "mongoose": "^6.3.3"
+  }
+}
