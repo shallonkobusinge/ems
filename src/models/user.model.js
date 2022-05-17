@@ -55,3 +55,21 @@ exports.validateUser = function (user) {
     })
     return schema.validate(user);
 }
+
+
+exports.generateToken = async (user) => {
+    const token = jwt.sign({
+        userId: user._id,
+        firstName: user.fname,
+        lastName: user.lname,
+        email: user.email,
+        isAdmin: user.isAdmin,
+        username: user.username,
+        phone: user.phone,
+    },
+        process.env.JWT_SECRET_KEY,
+        { expiresIn: '12h' }
+    )
+    return token;
+
+}

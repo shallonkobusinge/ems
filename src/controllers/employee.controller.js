@@ -9,7 +9,6 @@ exports.getAll = async (req, res) => {
     return res.status(200).send(SUCCESS_RESPONSE(employees, "Employees retrieved successfully", 200));
 
 }
-
 exports.getOne = async (req, res) => {
     const employeeExists = await Employee.findOne({ _id: req.params.id }).populate('user');
     if (!employeeExists) {

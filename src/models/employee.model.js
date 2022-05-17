@@ -29,7 +29,7 @@ exports.Employee = mongoose.model("Employee", EmployeeSchema);
 exports.ValidateEmployee = (employee) => {
     const schema = Joi.object({
         user: Joi.objectId().required(),
-        department: Joi.string().valid(EDepartments).required(),
+        department: Joi.string().required(),
     })
     return schema.validate(employee);
 }

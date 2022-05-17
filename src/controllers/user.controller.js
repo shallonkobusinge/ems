@@ -1,5 +1,5 @@
-const { User, validateUser } = require("../models/user.model");
-const { SUCCESS_RESPONSE, ERROR_RESPONSE } = require("../utils/APIResponse");
+const { User, validateUser, generateToken } = require("../models/user.model");
+const { SUCCESS_RESPONSE, ERROR_RESPONSE, CREATED_RESPONSE } = require("../utils/APIResponse");
 const bcrypt = require("bcrypt");
 exports.getAll = async (req, res) => {
     const all = await User.paginate()
@@ -29,7 +29,8 @@ exports.create = async (req, res) => {
         ))
     const user = new User(req.body);
     await user.save();
-    return res.status(201).send(SUCCESS_RESPONSE(user, "User created", 201));
+    const token = await generateToken(user);
+    return res.status(201).send(CREATED_RESPONSE(token, user, "User created", 201));
 
 }
 

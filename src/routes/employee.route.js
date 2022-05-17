@@ -1,11 +1,13 @@
 const EmployeeController = require('../controllers/employee.controller');
+const { verifiedToken } = require("../utils/token");
+const BASE_URL = process.env.BASE_URL;
+
 
 module.exports = (app) => {
-    const BASE_URL = process.env.BASE_URL;
-    app.get(`${BASE_URL}/employees`, EmployeeController.getAll);
-    app.post(`${BASE_URL}/employees`, EmployeeController.create);
-    app.get(`${BASE_URL}/employees/:id`, EmployeeController.getOne);
-    app.put(`${BASE_URL}/employees/:id`, EmployeeController.update);
-    app.delete(`${BASE_URL}/employees/:id`, EmployeeController.delete);
+    app.get(`${BASE_URL}/employees`, verifiedToken, EmployeeController.getAll);
+    app.post(`${BASE_URL}/employees`, verifiedToken, EmployeeController.create);
+    app.get(`${BASE_URL}/employees/:id`, verifiedToken, EmployeeController.getOne);
+    app.put(`${BASE_URL}/employees/:id`, verifiedToken, EmployeeController.update);
+    app.delete(`${BASE_URL}/employees/:id`, verifiedToken, EmployeeController.delete);
 
 }
