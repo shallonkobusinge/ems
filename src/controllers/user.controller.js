@@ -14,12 +14,13 @@ exports.create = async (req, res) => {
     const existingUser = await User.findOne({
         $or: [
             { email: req.body.email },
-            { username: req.body.username }
+            { username: req.body.username },
+            { phone: req.body.phone }
         ]
     }
     );
     if (existingUser) {
-        res.status(400).send(ERROR_RESPONSE(null, `User with email of ${existingUser.email} or username ${existingUser.username} already exists`, 400));
+        res.status(400).send(ERROR_RESPONSE(null, `User with email of ${existingUser.email} or username ${existingUser.username}  or phone ${existingUser.phone} already exists`, 400));
         return;
     }
     req.body.password = await bcrypt.hash(
@@ -57,7 +58,8 @@ exports.update = async (req, res) => {
         },
         $or: [
             { email: req.body.email },
-            { username: req.body.username }
+            { username: req.body.username },
+            { phone: req.body.phone }
         ]
     })
     // if (!sameUser) {

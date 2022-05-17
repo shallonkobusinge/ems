@@ -13,6 +13,7 @@ app.use("cors", cors());
 app.set('port', port);
 
 require("./src/routes/user.router")(app);
+require("./src/routes/employee.route")(app);
 
 mongoose.connect(process.env.DB_URL, {
     useNewUrlParser: true,

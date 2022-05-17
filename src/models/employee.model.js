@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 const Joi = require('joi');
-Joi.ObjectId = require('joi.objectId')(Joi);
+Joi.objectId = require('joi-objectId')(Joi);
 const { User } = require("../models/user.model");
 const pagination = require("mongoose-paginate-v2");
 var depopulate = require('mongoose-deep-populate')(mongoose);
+const { EDepartments } = require("../utils/common.util");
 
 
 const EmployeeSchema = mongoose.Schema({
@@ -13,6 +14,7 @@ const EmployeeSchema = mongoose.Schema({
     },
     department: {
         type: String,
+        enum: EDepartments,
         required: true,
     }
 }, {
@@ -27,7 +29,7 @@ exports.Employee = mongoose.model("Employee", EmployeeSchema);
 exports.ValidateEmployee = (employee) => {
     const schema = Joi.object({
         user: Joi.objectId().required(),
-        department: Joi.string().required()
+        department: Joi.string().valid(EDepartments).required(),
     })
     return schema.validate(employee);
 }
