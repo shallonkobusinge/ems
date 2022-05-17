@@ -8,5 +8,6 @@ module.exports = (app) => {
     app.post(`${BASE_URL}/users`, UserController.create);
     app.put(`${BASE_URL}/users/:id`, UserController.update);
     app.delete(`${BASE_URL}/users/:id`, UserController.delete);
+    app.post(`${BASE_URL}/users/login`, UserController.login);
 }
 

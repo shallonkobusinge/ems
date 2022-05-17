@@ -56,6 +56,16 @@ exports.validateUser = function (user) {
     return schema.validate(user);
 }
 
+exports.validateLogin = function (user) {
+    const schema = Joi.object({
+        email: Joi.string().email(),
+        username: Joi.string(),
+        phone: Joi.string(),
+        password: Joi.string().min(3),
+    })
+    return schema.validate(user);
+}
+
 
 exports.generateToken = async (user) => {
     const token = jwt.sign({

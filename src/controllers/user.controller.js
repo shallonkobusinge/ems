@@ -1,4 +1,4 @@
-const { User, validateUser, generateToken } = require("../models/user.model");
+const { User, validateUser, generateToken, validateLogin } = require("../models/user.model");
 const { SUCCESS_RESPONSE, ERROR_RESPONSE, CREATED_RESPONSE } = require("../utils/APIResponse");
 const bcrypt = require("bcrypt");
 exports.getAll = async (req, res) => {
@@ -88,4 +88,32 @@ exports.delete = async (req, res) => {
     }
     await existingUser.remove();
     return res.status(200).send(SUCCESS_RESPONSE(null, "User deleted", 200));
+}
+
+
+exports.login = async (req, res) => {
+    const { error } = validateLogin(req.body);
+    if (error) {
+        return res.status(400).send(ERROR_RESPONSE(null, error, 400));
+    }
+
+    let sameUser = await User.findOne({
+        $or: [
+            { email: req.body.email },
+            { username: req.body.username },
+            { phone: req.body.phone }
+        ]
+
+    })
+    if (!sameUser) {
+        return res.status(404).send(ERROR_RESPONSE(null, "User not found", 404));
+    }
+
+    const isMatch = bcrypt.compare(sameUser.password, req.body.password);
+    if (!isMatch) {
+        return res.status(401).send(ERROR_RESPONSE(null, "Invalid password", 401));
+    }
+    const token = await generateToken(sameUser);
+    return res.status(200).send(CREATED_RESPONSE(token, sameUser, "User logged in", 200));
+
 }
