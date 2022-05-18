@@ -2,7 +2,16 @@ const { Employee, ValidateEmployee } = require("../models/employee.model");
 const { User } = require("../models/user.model");
 const { SUCCESS_RESPONSE, ERROR_RESPONSE } = require("../utils/APIResponse");
 
-
+//find employee by userId
+exports.findByUserId = async (req, res) => {
+    const employee = await Employee.findOne({
+        userId: req.params.id
+    }).populate('user');
+    if (!employee) {
+        return res.status(404).send(ERROR_RESPONSE(null, "Employee not found", 404));
+    }
+    return res.status(200).send(SUCCESS_RESPONSE(employee, "Retrieved employee", 200));
+}
 exports.getAll = async (req, res) => {
 
     const employees = await Employee.paginate({}, { populate: ['user'] })
