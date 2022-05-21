@@ -11,16 +11,6 @@
     },
     "host": "localhost:5000",
     "basePath": "/",
-    "tags": [
-        {
-            "name": "Employee",
-            "description": "Employee Management"
-        },
-        {
-            "name": "auth",
-            "description": "Authentication"
-        }
-    ],
     "schemes": [
         "http"
     ],
