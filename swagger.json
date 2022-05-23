@@ -1,337 +1,353 @@
 {
     "swagger": "2.0",
-    "info": {
-        "title": "Swagger API",
-        "description": "Swagger API",
-        "version": "1.0.0",
-        "license": {
-            "name": "MIT",
-            "url": "https://opensource.org/licenses/MIT"
-        }
-    },
-    "components": {
-        "securitySchemes": {
-            "bearerAuth": {
-                "type": "http",
-                "scheme": "bearer",
-                "bearerFormat": "JWT"
+    "swaggerDefinition": {
+        "info": {
+            "title": "Swagger API",
+            "description": "Swagger API",
+            "version": "1.0.0",
+            "license": {
+                "name": "MIT",
+                "url": "https://opensource.org/licenses/MIT"
             }
-        }
-    },
-    "security": [
-        {
-            "bearerAuth": []
-        }
-    ],
-    "host": "localhost:5000",
-    "basePath": "/",
-    "schemes": [
-        "http"
-    ],
-    "consumes": [
-        "application/json"
-    ],
-    "produces": [
-        "application/json"
-    ],
-    "paths": {
-        "/api/v1/users": {
-            "get": {
-                "tags": [
-                    "User"
-                ],
-                "summary": "Get all Users",
-                "responses": {
-                    "200": {
-                        "description": "A list of users",
-                        "schema": {
-                            "$ref": "#/definitions/User"
-                        }
-                    }
+        },
+        "components": {
+            "securitySchemes": {
+                "bearerAuth": {
+                    "type": "http",
+                    "scheme": "bearer",
+                    "bearerFormat": "JWT"
                 }
             }
         },
-        "/api/v1/users/add": {
-            "post": {
-                "tags": [
-                    "User"
-                ],
-                "summary": "Create a new User",
+        "security": [
+            {
+                "bearerAuth": []
+            }
+        ],
+        "host": "localhost:5000",
+        "basePath": "/",
+        "schemes": [
+            "http"
+        ],
+        "consumes": [
+            "application/json"
+        ],
+        "produces": [
+            "application/json"
+        ],
+        "paths": {
+            "/api/v1/users": {
+                "get": {
+                    "tags": [
+                        "User"
+                    ],
+                    "summary": "Get all Users",
+                    "responses": {
+                        "200": {
+                            "description": "A list of users",
+                            "schema": {
+                                "$ref": "#/definitions/User"
+                            }
+                        }
+                    }
+                }
+            },
+            "/api/v1/users/add": {
+                "post": {
+                    "tags": [
+                        "User"
+                    ],
+                    "summary": "Create a new User",
+                    "parameters": [
+                        {
+                            "name": "user",
+                            "in": "body",
+                            "description": "User object that needs to be added to the store",
+                            "required": true,
+                            "schema": {
+                                "$ref": "#/definitions/User"
+                            }
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "User added successfully"
+                        },
+                        "400": {
+                            "description": "Invalid user supplied"
+                        }
+                    }
+                }
+            },
+            "/api/v1/users/{id}": {
                 "parameters": [
                     {
-                        "name": "user",
-                        "in": "body",
-                        "description": "User object that needs to be added to the store",
+                        "name": "id",
+                        "in": "path",
                         "required": true,
+                        "description": "ID of user to fetch",
+                        "type": "string"
+                    }
+                ],
+                "delete": {
+                    "summary": "Delete user with the given ID",
+                    "tags": [
+                        "User"
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "User deleted successfully"
+                        },
                         "schema": {
                             "$ref": "#/definitions/User"
                         }
                     }
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "User added successfully"
-                    },
-                    "400": {
-                        "description": "Invalid user supplied"
-                    }
-                }
-            }
-        },
-        "/api/v1/users/{id}": {
-            "parameters": [
-                {
-                    "name": "id",
-                    "in": "path",
-                    "required": true,
-                    "description": "ID of user to fetch",
-                    "type": "string"
-                }
-            ],
-            "delete": {
-                "summary": "Delete user with the given ID",
-                "tags": [
-                    "User"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "User deleted successfully"
-                    },
-                    "schema": {
-                        "$ref": "#/definitions/User"
-                    }
-                }
-            },
-            "get": {
-                "summary": "Get user with the given ID",
-                "tags": [
-                    "User"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "User retrieved successfully"
-                    },
-                    "schema": {
-                        "$ref": "#/definitions/User"
-                    }
-                }
-            },
-            "put": {
-                "summary": "Update user with the given ID",
-                "tags": [
-                    "User"
-                ],
-                "parameters": [
-                    {
-                        "name": "user",
-                        "in": "body",
-                        "description": "User object that needs to be added to the store",
+                },
+                "get": {
+                    "summary": "Get user with the given ID",
+                    "tags": [
+                        "User"
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "User retrieved successfully"
+                        },
                         "schema": {
                             "$ref": "#/definitions/User"
                         }
                     }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "User updated successfully"
-                    }
-                }
-            }
-        },
-        "/api/v1/employees": {
-            "get": {
-                "tags": [
-                    "Employee"
-                ],
-                "summary": "Get all Employees",
-                "responses": {
-                    "200": {
-                        "description": "A list of employees",
-                        "schema": {
-                            "$ref": "#/definitions/Employee"
+                },
+                "put": {
+                    "summary": "Update user with the given ID",
+                    "tags": [
+                        "User"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "user",
+                            "in": "body",
+                            "description": "User object that needs to be added to the store",
+                            "schema": {
+                                "$ref": "#/definitions/User"
+                            }
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "User updated successfully"
                         }
                     }
                 }
-            }
-        },
-        "/api/v1/employees/add": {
-            "post": {
-                "tags": [
-                    "Employee"
-                ],
-                "summary": "Create a new Employee",
+            },
+            "/api/v1/employees": {
+                "get": {
+                    "tags": [
+                        "Employee"
+                    ],
+                    "summary": "Get all Employees",
+                    "responses": {
+                        "200": {
+                            "description": "A list of employees",
+                            "schema": {
+                                "$ref": "#/definitions/Employee"
+                            }
+                        }
+                    }
+                }
+            },
+            "/api/v1/employees/add": {
+                "post": {
+                    "tags": [
+                        "Employee"
+                    ],
+                    "summary": "Create a new Employee",
+                    "parameters": [
+                        {
+                            "name": "employee",
+                            "in": "body",
+                            "description": "Employee object that needs to be added to the store",
+                            "required": true,
+                            "schema": {
+                                "$ref": "#/definitions/Employee"
+                            }
+                        }
+                    ],
+                    "produces": [
+                        "application/json"
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "Employee added successfully"
+                        },
+                        "400": {
+                            "description": "Invalid employee supplied"
+                        }
+                    }
+                }
+            },
+            "/api/v1/employees/{id}": {
                 "parameters": [
                     {
-                        "name": "employee",
-                        "in": "body",
-                        "description": "Employee object that needs to be added to the store",
+                        "name": "id",
+                        "in": "path",
                         "required": true,
+                        "description": "ID of employee to fetch",
+                        "type": "string"
+                    }
+                ],
+                "delete": {
+                    "summary": "Delete employee with the given ID",
+                    "tags": [
+                        "Employee"
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "Employee deleted successfully"
+                        },
                         "schema": {
                             "$ref": "#/definitions/Employee"
                         }
                     }
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Employee added successfully"
-                    },
-                    "400": {
-                        "description": "Invalid employee supplied"
-                    }
-                }
-            }
-        },
-        "/api/v1/employees/{id}": {
-            "parameters": [
-                {
-                    "name": "id",
-                    "in": "path",
-                    "required": true,
-                    "description": "ID of employee to fetch",
-                    "type": "string"
-                }
-            ],
-            "delete": {
-                "summary": "Delete employee with the given ID",
-                "tags": [
-                    "Employee"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Employee deleted successfully"
-                    },
-                    "schema": {
-                        "$ref": "#/definitions/Employee"
-                    }
-                }
-            },
-            "get": {
-                "summary": "Get employee with the given ID",
-                "tags": [
-                    "Employee"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Employee retrieved successfully"
-                    },
-                    "schema": {
-                        "$ref": "#/definitions/Employee"
-                    }
-                }
-            },
-            "put": {
-                "summary": "Update employee with the given ID",
-                "tags": [
-                    "Employee"
-                ],
-                "parameters": [
-                    {
-                        "name": "employee",
-                        "in": "body",
-                        "description": "Employee object that needs to be added to the store",
+                },
+                "get": {
+                    "summary": "Get employee with the given ID",
+                    "tags": [
+                        "Employee"
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "Employee retrieved successfully"
+                        },
                         "schema": {
                             "$ref": "#/definitions/Employee"
                         }
                     }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Employee updated successfully"
-                    }
-                }
-            }
-        },
-        "/api/v1/users/login": {
-            "post": {
-                "tags": [
-                    "User"
-                ],
-                "summary": "Login of the user",
-                "parameters": [
-                    {
-                        "name": "login",
-                        "in": "body",
-                        "description": "Adding user to login",
-                        "schema": {
-                            "$ref": "#/definitions/Login"
+                },
+                "put": {
+                    "summary": "Update employee with the given ID",
+                    "tags": [
+                        "Employee"
+                    ],
+                    "parameters": [
+                        {
+                            "name": "employee",
+                            "in": "body",
+                            "description": "Employee object that needs to be added to the store",
+                            "schema": {
+                                "$ref": "#/definitions/Employee"
+                            }
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "Employee updated successfully"
                         }
                     }
-                ]
-            }
-        }
-    },
-    "definitions": {
-        "User": {
-            "required": [
-                "fname",
-                "lname",
-                "email",
-                "password",
-                "username",
-                "isAdmin",
-                "phone"
-            ],
-            "properties": {
-                "fname": {
-                    "type": "string"
-                },
-                "lname": {
-                    "type": "string"
-                },
-                "email": {
-                    "type": "string"
-                },
-                "password": {
-                    "type": "string"
-                },
-                "username": {
-                    "type": "string"
-                },
-                "isAdmin": {
-                    "type": "boolean"
-                },
-                "phone": {
-                    "type": "string"
+                }
+            },
+            "/api/v1/users/login": {
+                "post": {
+                    "tags": [
+                        "User"
+                    ],
+                    "summary": "Login of the user",
+                    "parameters": [
+                        {
+                            "name": "username",
+                            "in": "body",
+                            "description": "Adding user to login",
+                            "schema": {
+                                "$ref": "#/definitions/Login"
+                            }
+                        }
+                    ],
+                    "responses": {
+                        "201": {
+                            "description": "User added successfully"
+                        },
+                        "400": {
+                            "description": "Bad request"
+                        },
+                        "500": {
+                            "description": "Internal Server Error"
+                        }
+                    }
                 }
             }
         },
-        "Employee": {
-            "properties": {
-                "user": {
-                    "type": "string"
-                },
-                "department": {
-                    "type": "string"
+        "definitions": {
+            "User": {
+                "required": [
+                    "fname",
+                    "lname",
+                    "email",
+                    "password",
+                    "username",
+                    "isAdmin",
+                    "phone"
+                ],
+                "properties": {
+                    "fname": {
+                        "type": "string"
+                    },
+                    "lname": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "username": {
+                        "type": "string"
+                    },
+                    "isAdmin": {
+                        "type": "boolean"
+                    },
+                    "phone": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Employee": {
+                "properties": {
+                    "user": {
+                        "type": "string"
+                    },
+                    "department": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Login": {
+                "properties": {
+                    "username": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "phone": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
                 }
             }
         },
-        "Login": {
-            "properties": {
-                "username": {
-                    "type": "string"
-                },
-                "email": {
-                    "type": "string"
-                },
-                "phone": {
-                    "type": "string"
-                },
-                "password": {
-                    "type": "string"
-                }
+        "Users": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/User"
             }
         }
     },
-    "Users": {
-        "type": "array",
-        "items": {
-            "$ref": "#/definitions/User"
-        }
-    }
+    "apis": [
+        "./src/routes/*"
+    ]
 }

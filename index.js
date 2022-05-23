@@ -7,25 +7,12 @@ const mongoose = require('mongoose');
 const port = process.env.PORT || 5000;
 const app = express();
 const swaggerUi = require("swagger-ui-express");
-// swaggerDocument = require('./swagger.json');
+swaggerDocument = require('./swagger.json');
 
 const swaggerJsdoc = require("swagger-jsdoc");
-
-const options = {
-    swaggerDefinition: {
-        info: {
-            title: 'API Documentation',
-            description: 'API Documentation',
-            version: '1.0.0',
-        },
-    },
-    apis: ["./src/routes/*"]
-};
-
-const swaggerSpecification = swaggerJsdoc(options);
+const swaggerSpecification = swaggerJsdoc(swaggerDocument);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecification));
-
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
