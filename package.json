@@ -21,6 +21,7 @@
     "mongoose": "^6.3.3",
     "mongoose-deep-populate": "^3.2.0",
     "mongoose-paginate-v2": "^1.6.3",
+    "swagger-jsdoc": "^6.2.1",
     "swagger-ui-express": "^4.4.0"
   }
 }

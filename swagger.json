@@ -255,7 +255,7 @@
                 "summary": "Login of the user",
                 "parameters": [
                     {
-                        "name": "user",
+                        "name": "login",
                         "in": "body",
                         "description": "Adding user to login",
                         "schema": {
