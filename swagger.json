@@ -9,6 +9,20 @@
             "url": "https://opensource.org/licenses/MIT"
         }
     },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    },
+    "security": [
+        {
+            "bearerAuth": []
+        }
+    ],
     "host": "localhost:5000",
     "basePath": "/",
     "schemes": [
@@ -232,6 +246,24 @@
                     }
                 }
             }
+        },
+        "/api/v1/users/login": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Login of the user",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "Adding user to login",
+                        "schema": {
+                            "$ref": "#/definitions/Login"
+                        }
+                    }
+                ]
+            }
         }
     },
     "definitions": {
@@ -275,6 +307,22 @@
                     "type": "string"
                 },
                 "department": {
+                    "type": "string"
+                }
+            }
+        },
+        "Login": {
+            "properties": {
+                "username": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "password": {
                     "type": "string"
                 }
             }
