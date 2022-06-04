@@ -92,6 +92,7 @@ exports.delete = async (req, res) => {
 
 
 exports.login = async (req, res) => {
+    console.log(req.body);
     const { error } = validateLogin(req.body);
     if (error) {
         return res.status(400).send(ERROR_RESPONSE(null, error, 400));
@@ -105,6 +106,7 @@ exports.login = async (req, res) => {
         ]
 
     })
+    console.log(sameUser);
     if (!sameUser) {
         return res.status(404).send(ERROR_RESPONSE(null, "User not found", 404));
     }
